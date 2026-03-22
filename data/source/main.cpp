@@ -14,29 +14,31 @@ int main(){
         cout << "########################################" << endl;
         cout << "Digite o dia como 0 (zero) para sair" << endl;
         cout << "Digite uma data no formato dd mm aaaa: ";
-        cin >> dia, mes, ano;
+        cin >> dia >> mes >> ano;
+        cin.clear();
         if (dia == 0){
-            cout << "Saindo ,,,";
+            cout << "Saindo ...";
             break;
         }
-        dSemana = diaSemana(dia, mes, ano);
-        diaSemana(dSemana);
-
+        if(utildatas(dia, mes, ano)){ 
+            dSemana = diaSemana(dia, mes, ano);
+            diaSemana(dSemana);
+        }
         cout << endl;
     } while (true);
     return 0;
 }
 
 bool anoBissexto(int ano){
-    return ((ano % 4 == 0 && !ano % 100 == 0) || ano % 400 == 0);
+    return ((ano % 4 == 0 && !(ano % 100 == 0)) || ano % 400 == 0);
 }
 int diaSemana(int dia, int mes, int ano){
-    int dSemana = ano + dia + 3 * (mes -1);
+    int dSemana = ano + dia + 3 * (mes-1) - 1;
     if(mes < 3)
         ano--;
     else
         dSemana -= int(0.4*mes+2.3);
-    dSemana += int(ano / 4) - int((ano / 100)*0.75);
+    dSemana += int(ano/4) - int((ano/100 + 1)*0.75);
     dSemana %= 7;
 
     return dSemana;
