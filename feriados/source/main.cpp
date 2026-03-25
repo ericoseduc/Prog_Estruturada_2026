@@ -7,9 +7,11 @@ long int unsigned dataJuliana(int, int, int);
 int unsigned diaSemana(int, int, int);
 void diaSemana(int);
 void dataGregoriana(int long, int[]);
+void escreveDataGregoriana(int[]);
 
 int main(){
     int dia, mes, ano;
+    int dtGregoriana[3];
     while (true)
     {
         cout << "Digite uma data no formato dd mm aaaa: ";
@@ -17,6 +19,10 @@ int main(){
         cin.clear();
         
         diaSemana(diaSemana(dia, mes, ano));
+        dataGregoriana(dataJuliana(dia, mes, ano), dtGregoriana);
+
+        escreveDataGregoriana(dtGregoriana);
+        cout << endl;
     }
 }
 
@@ -63,11 +69,22 @@ void dataGregoriana(int long dataJuliana, int dGregoriana[]){
     int B = dataJuliana + 68569;
     int N = (B * 4) / 146097;
     B = B - ((146097 * N + 3) / 4);
-    int K = (4000 + (B + 1)) / 1461001;
+    int K = (4000 * (B + 1)) / 1461001;
     B = B - (1461 * K) / 4 + 31;
     int J = ( 80 * B) / 2447;
     dGregoriana[0] = B - (2447 * J) / 80;
     B = (J / 11);
     dGregoriana[1] = J + 2 - (12 * B);
     dGregoriana[2] = 100 * (N - 49) + K + B;
+}
+
+void escreveDataGregoriana(int data[3]){
+    int dia = data[0];
+    int mes = data[1];
+    int ano = data[2];
+    dia < 10 ? cout << 0 << dia : cout << dia;
+    cout << "/";
+    mes < 10 ? cout << 0 << mes : cout << mes;
+    cout << "/";
+    cout << ano;
 }
