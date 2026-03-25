@@ -8,6 +8,9 @@ int unsigned diaSemana(int, int, int);
 void diaSemana(int);
 void dataGregoriana(int long, int[]);
 void escreveDataGregoriana(int[]);
+long int unsigned dataPascoa(int);
+void dataCarnaval(int);
+void dataCorpusChristi(int);
 
 int main(){
     int dia, mes, ano;
@@ -87,4 +90,19 @@ void escreveDataGregoriana(int data[3]){
     mes < 10 ? cout << 0 << mes : cout << mes;
     cout << "/";
     cout << ano;
+}
+
+long int unsigned dataPascoa(int ano){
+    int A = ano%19;
+    int B = ano/100;
+    int C = ano%100;
+    int D = B/4;
+    int E = B%4;
+    int F = 
+}
+void dataCarnaval(int ano){
+ 
+}
+void dataCorpusChristi(int ano){
+
 }
