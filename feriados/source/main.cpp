@@ -4,28 +4,35 @@
 using namespace std;
 
 long int unsigned dataJuliana(int, int, int);
-int unsigned diaSemana(int, int, int);
-void diaSemana(int);
+int unsigned diaSemana(int long unsigned);
+void diaSemana(int unsigned);
 void dataGregoriana(int long, int[]);
 void escreveDataGregoriana(int[]);
-long int unsigned dataPascoa(int);
-void dataCarnaval(int);
-void dataCorpusChristi(int);
+long int unsigned dataPascoa(int); // retorna uma data Juliana
+long int unsigned dataCarnaval(int); // retorna uma data Juliana
+long int unsigned dataCorpusChristi(int); // retorna uma data Juliana
 
 int main(){
-    int dia, mes, ano;
+    int ano;
     int dtGregoriana[3];
     while (true)
     {
-        cout << "Digite uma data no formato dd mm aaaa: ";
-        cin >> dia >> mes >> ano;
+        cout << "Informe o ano que deseja o calendário no formato aaaa: ";
+        cin >> ano;
         cin.clear();
         
-        diaSemana(diaSemana(dia, mes, ano));
-        dataGregoriana(dataJuliana(dia, mes, ano), dtGregoriana);
-
+        dataGregoriana(dataPascoa(ano), dtGregoriana);
         escreveDataGregoriana(dtGregoriana);
-        cout << endl;
+        cout << diaSemana(dataPascoa(ano)) <<" de Páscoa" << endl;
+
+        dataGregoriana(dataCarnaval(ano), dtGregoriana);
+        escreveDataGregoriana(dtGregoriana);
+        cout << diaSemana(dataCarnaval(ano)) << " de Carnaval" << endl;
+
+        dataGregoriana(dataCorpusChristi(ano), dtGregoriana);
+        escreveDataGregoriana(dtGregoriana);
+        diaSemana(diaSemana(dataCorpusChristi(ano)));
+        cout << " - Corpus Christi" << endl;
     }
 }
 
@@ -36,11 +43,11 @@ long int unsigned dataJuliana(int dia, int mes, int ano){
     + dia - 32075;
 }
 
-int unsigned diaSemana(int dia, int mes, int ano){
-    return dataJuliana(dia, mes, ano) % 7;
+int unsigned diaSemana(int long unsigned dataJuliana){
+    return dataJuliana % 7;
 }
 
-void diaSemana(int dSemana){
+void diaSemana(int unsigned dSemana){
     switch (dSemana)
     {
         case 0:
@@ -65,7 +72,7 @@ void diaSemana(int dSemana){
             cout << "Domingo";
             break;
     }
-    cout << endl;
+    cout << " ";
 }
 
 void dataGregoriana(int long dataJuliana, int dGregoriana[]){
@@ -93,16 +100,28 @@ void escreveDataGregoriana(int data[3]){
 }
 
 long int unsigned dataPascoa(int ano){
-    int A = ano%19;
-    int B = ano/100;
-    int C = ano%100;
-    int D = B/4;
-    int E = B%4;
-    int F = 
+    int a = ano % 19;
+    int b = ano / 100;
+    int c = ano % 100;
+    int d = b / 4;
+    int e = b % 4;
+    int f = (b + 8) / 25;
+    int g = (b - f + 1) / 3;
+    int h = (19 * a + b - d - g + 15) % 30;
+    int i = c / 4;
+    int k = c % 4;
+    int l = (32 + 2 * e + 2 * i - h - k) % 7;
+    int m = (a + 11 * h + 22 * l) / 451;
+    int mes = (h  + l - 7 * m + 114) / 31;
+    int dia = ((h + l - 7 * m + 114) % 31) + 1;
+    return dataJuliana(dia, mes, ano);
 }
-void dataCarnaval(int ano){
- 
-}
-void dataCorpusChristi(int ano){
 
+long int unsigned dataCarnaval(int ano){
+ //Pascoa - 41 terça de carnaval , -45 sabado de carnaval
+    return dataPascoa(ano) - 47;
+}
+long int unsigned dataCorpusChristi(int ano){
+//Pascoa + 60
+    return dataPascoa(ano) + 60;
 }
