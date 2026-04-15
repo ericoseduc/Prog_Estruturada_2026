@@ -10,7 +10,7 @@ class Aluno{
         int idade;
         float altura = 0.0;
         float peso = 0.0;
-        //data de nacimento
+        //data de nascimento
         int dia, mes, ano;
     
     public:
@@ -108,8 +108,7 @@ void Aluno::printDados(){
     cout << "Olá!" << endl << "Meu nome é: " << this->getNome() << endl 
          << "Data de Nascimento: ";
     this->getDataDeNascimento();
-    cout << endl
-         << "Idade: " << this->getIdade() << endl
+    cout << "Idade: " << this->getIdade() << endl
          << "Peso: " << this->getPeso() << endl
          << "Altura: " << this->getAltura() << endl;
 }
