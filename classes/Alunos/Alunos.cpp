@@ -7,7 +7,6 @@ using namespace std;
 class Aluno{
     private:
         string nome;
-        int idade;
         float altura = 0.0;
         float peso = 0.0;
         //data de nascimento
@@ -15,15 +14,14 @@ class Aluno{
     
     public:
         //construtores
+        Aluno(){}
         Aluno(string n){
             this->nome = n;
         }
-        Aluno(string n, int i);
         Aluno(string n, int d, int m, int a);
         
         //getters e setters
         int getIdade();
-        void setIdade(int d, int m, int a);
         void setDataDeNascimento(int d, int m, int a);
         void getDataDeNascimento();
         int calcularIdade(int d, int m, int a);
@@ -36,32 +34,21 @@ class Aluno{
         void setNome(string nome);
 };
 
-Aluno::Aluno(string n, int i){
-    this->nome = n;
-    this->idade = i;
-}
-
 Aluno::Aluno(string n, int d, int m, int a){
     this->nome = n;
     this->dia = d;
     this->mes = m;
     this->ano = a;
-    this->idade = calcularIdade(d, m, a);
 }
 
 int Aluno::getIdade(){
-    return this->idade;
-}
-
-void Aluno::setIdade(int d, int m, int a){
-    this->idade = calcularIdade(d, m, a);
+    return this->calcularIdade(this->dia, this->mes, this->ano);
 }
 
 void Aluno::setDataDeNascimento(int d, int m, int a){
     this->dia = d;
     this->mes = m;
     this->ano = a;
-    this->setIdade(d,m,a);
 }
 
 void Aluno::getDataDeNascimento(){
@@ -109,6 +96,6 @@ void Aluno::printDados(){
          << "Data de Nascimento: ";
     this->getDataDeNascimento();
     cout << "Idade: " << this->getIdade() << endl
-         << "Peso: " << this->getPeso() << endl
-         << "Altura: " << this->getAltura() << endl;
+         << "Peso: " << this->getPeso() <<" Kg" << endl
+         << "Altura: " << this->getAltura() << " m" << endl;
 }
